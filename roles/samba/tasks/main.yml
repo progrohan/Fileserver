@@ -1,0 +1,14 @@
+- name: Установка пакетов Samba
+  dnf:
+    name: samba
+    state: present
+- name: Настройка конфигурации Samba
+  template:
+    src: ../template/smb.conf.j2
+    dest: /etc/samba/smb.conf
+    notify:
+        - Перезапуск Samba
+- name: Перезапуск Samba
+  service:
+    name: smbd
+    state: restarted
