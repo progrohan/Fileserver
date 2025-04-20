@@ -1,0 +1,11 @@
+- name: Установка и настройка файлового сервера
+    hosts: fileserver
+    become: true
+    vars_files:
+      - vars/users.yml 
+    roles:
+      - base
+      - samba
+      - nfs
+      - sftp
+      - users

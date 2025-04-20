@@ -1,0 +1,31 @@
+- name: Обновление apt и установка основных утилит
+  dnf:
+    update_cache: yes
+    name:
+      - vim
+      - curl
+      - htop
+      - rsync
+    state: present
+
+- name: Создание общей директории хранения
+  file:
+    path: /srv/storage
+    state: directory
+    owner: root
+    group: fileshare
+    mode: '2770'
+
+- name: Создание группы fileshare
+  group:
+    name: fileshare
+    state: present
+
+- name: Добавление пользователей
+  loop: "{{ users }}"
+  user:
+    name: "{{ item.name }}"
+    groups: [fileshare]
+    append: yes
+    shell: /bin/bash
+    state: present

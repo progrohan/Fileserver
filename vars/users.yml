@@ -1,0 +1,6 @@
+users:
+  - name: admin
+    groups: "wheel"
+    password: adminpassword
+  - name: guest
+    password: guest123
