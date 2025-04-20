@@ -1,0 +1,17 @@
+- name: Установка SSH-сервера (если ещё не установлен)
+  dnf:
+    name: openssh-server
+    state: present
+
+- name: Настройка конфигурации SSH для SFTP
+  template:
+    src: sftp_sshd_config.j2
+    dest: /etc/ssh/sshd_config
+  notify:
+    - Перезапуск SSH
+
+- name: Перезапуск SSH
+  service:
+    name: ssh
+    state: restarted
+

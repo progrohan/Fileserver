@@ -1,0 +1,10 @@
+Port 22
+Protocol 2
+Subsystem sftp internal-sftp
+
+Match Group {{ sftp_group }}
+    ChrootDirectory /srv
+    ForceCommand internal-sftp
+    AllowTcpForwarding no
+    X11Forwarding no
+
