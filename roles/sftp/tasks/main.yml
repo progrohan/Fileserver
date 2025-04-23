@@ -12,6 +12,6 @@
 
 - name: Перезапуск SSH
   service:
-    name: ssh
+    name: sshd
     state: restarted
 

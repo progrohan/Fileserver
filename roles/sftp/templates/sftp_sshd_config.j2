@@ -1,8 +1,11 @@
 Port 22
 Protocol 2
-Subsystem sftp internal-sftp
+UsePAM yes
+PermitRootLogin yes
+PasswordAuthentication yes
 
-Match Group {{ sftp_group }}
+Match Group fileshare
+    Subsystem sftp internal-sftp
     ChrootDirectory /srv
     ForceCommand internal-sftp
     AllowTcpForwarding no

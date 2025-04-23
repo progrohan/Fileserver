@@ -15,6 +15,6 @@
 
 - name: Перезапуск NFS
   service:
-    name: nfs-kernel-server
+    name: nfs-utils
     state: restarted
 
