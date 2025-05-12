@@ -1,4 +1,4 @@
-- name: Обновление apt и установка основных утилит
+- name: Обновление dnf и установка основных утилит
   dnf:
     update_cache: yes
     name:
@@ -6,6 +6,7 @@
       - curl
       - htop
       - rsync
+      - firewalld
     state: present
 
 - name: Создание группы fileshare
@@ -17,9 +18,9 @@
   file:
     path: /srv/storage
     state: directory
-    owner: root
-    group: fileshare
-    mode: '2770'
+    owner: nobody
+    group: nobody
+    mode: '0777'
 
 
 - name: Добавление пользователей

@@ -8,4 +8,5 @@
    - samba
    - nfs
    - sftp
+   - firewall
    - users

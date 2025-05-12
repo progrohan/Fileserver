@@ -1,0 +1,44 @@
+
+    - name: Убедиться, что firewalld запущен и включен
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+
+    - name: Разрешить NFS (порт 2049 TCP/UDP)
+      ansible.posix.firewalld:
+        port: "2049/tcp"
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Разрешить порты RPC (обычно требуется для NFS)
+      ansible.posix.firewalld:
+        port: "111/tcp"
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Разрешить порты Samba
+      ansible.posix.firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        immediate: yes
+        state: enabled
+      loop:
+        - "137/udp"   # NetBIOS Name Service
+        - "138/udp"   # NetBIOS Datagram Service
+        - "139/tcp"   # NetBIOS Session Service
+        - "445/tcp"   # SMB over TCP
+
+    - name: Разрешить SSH (SFTP работает через SSH)
+      ansible.posix.firewalld:
+        service: ssh
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Перезагрузить firewalld для гарантии применения правил
+      systemd:
+        name: firewalld
+        daemon_reload: yes
