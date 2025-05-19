@@ -6,7 +6,6 @@
   roles:
    - base
    - samba
-   - nfs
    - sftp
    - firewall
    - users
