@@ -1,0 +1,1 @@
+/srv/storage *(rw,sync,no_subtree_check)
